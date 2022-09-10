@@ -3,6 +3,7 @@ package com.example.sdkgooglemaps;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.sdkgooglemaps.databinding.ActivityMapsBinding;
@@ -42,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+    //Metodo principal Maps
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -53,6 +55,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Definindo uma areá através da Latitude e Logitude
         LatLng itaperuna = new LatLng(-21.207155, -41.8909067);
+
+
+
+        //Adicionando Metodo para  Evento de clique no mapa "Adicionando marcadores com clique
+        //O metodo onMapClick retorna LatLng
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick( LatLng latLng) {
+                mMap.addMarker(
+                        new MarkerOptions()
+                                .position(latLng)
+                                .title("Local")
+                                .snippet("Descrição: Localidade EcoPonto") //Definindo uma descrição com o snippet
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)) // Estilizando Icone do Mapa atraves Default com cor.
+
+                );
+
+            }
+        });
+
 
         /*É só chamarmos o metodo addMarker
           E depois instanciar "new MarkerOptions" e escolher qual função o mapa vai se comportar.
@@ -72,5 +94,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(itaperuna, 15)
         );
-    }
+    } //Fim metodo principal Maps
 }
