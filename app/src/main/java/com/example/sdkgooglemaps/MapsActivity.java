@@ -1,16 +1,19 @@
 package com.example.sdkgooglemaps;
 
-import androidx.fragment.app.FragmentActivity;
-
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentActivity;
+
+import com.example.sdkgooglemaps.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.sdkgooglemaps.databinding.ActivityMapsBinding;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -43,9 +46,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //Mudando a exibição do Mapa e estilo do mesmo
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+
+
+
+        // Definindo uma areá através da Latitude e Logitude
+        LatLng itaperuna = new LatLng(-21.207155, -41.8909067);
+
+        /*É só chamarmos o metodo addMarker
+          E depois instanciar "new MarkerOptions" e escolher qual função o mapa vai se comportar.
+         */
+        mMap.addMarker(
+                new MarkerOptions()
+                .position(itaperuna) //Passando o bjeto Itaperuna que recebe a Latitude e Long na primeira linha
+                .title("Centro de Itaperuna") //Definindo uma title através da função title
+                 .icon(
+                         //BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET); Mudando comportamento do icone do Mapa | Definindo uma cor
+                         BitmapDescriptorFactory.fromResource(R.drawable.icone_bikeseeker) // Estilizando Icone do Mapa atraves do fromResource.
+                 )
+        );
+
+        //Chamando metodo para dar zoom no mapa através do moveCamera e passando o CameraUpdateFactory
+        //Os valores do zoom são de 2.0 até 21.0
+        mMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(itaperuna, 15)
+        );
     }
 }
