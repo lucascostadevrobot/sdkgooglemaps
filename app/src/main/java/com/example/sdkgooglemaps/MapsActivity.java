@@ -1,5 +1,6 @@
 package com.example.sdkgooglemaps;
 
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -57,6 +59,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Definindo uma areá através da Latitude e Logitude
         LatLng itaperuna = new LatLng(-21.207155, -41.8909067);
 
+        //Desenhando formas no mapa como exemplos: Cirulos
+        CircleOptions circleOptions = new CircleOptions();
+        circleOptions.center(itaperuna);
+        circleOptions.radius(300); //Sempre em metros
+        circleOptions.strokeWidth(0); //Definindo a espessura da borda.
+        circleOptions.strokeColor(Color.BLUE); //Definindo a cor da borda
+        circleOptions.fillColor(Color.argb(50, 100, 50, 0)); //0 até 250 RGB
+        mMap.addCircle(circleOptions); //referenciando com o objeto principal mMap.
 
 
         //Adicionando Metodo para  Evento de clique no mapa "Adicionando marcadores com clique
