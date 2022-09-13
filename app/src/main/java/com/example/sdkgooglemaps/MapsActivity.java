@@ -2,6 +2,7 @@ package com.example.sdkgooglemaps;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -63,6 +64,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick( LatLng latLng) {
+
+                Double latitude = latLng.latitude;
+                Double longitude = latLng.longitude;
+
+                //Exibindo um toats mostrando a Latitude e Longitude através do Clique no mapa
+                Toast.makeText(MapsActivity.this,
+                        "onCLick Lat:" +latitude+ "Long:" + longitude, Toast.LENGTH_SHORT).show();
+
                 mMap.addMarker(
                         new MarkerOptions()
                                 .position(latLng)
